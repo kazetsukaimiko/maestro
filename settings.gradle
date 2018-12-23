@@ -1,0 +1,8 @@
+rootProject.name = 'maestro-parent'
+include ':maestro-core'
+include ':maestro-usb4java'
+include ':maestro-android'
+
+project(':maestro-core').projectDir = "$rootDir/maestro-core" as File
+project(':maestro-usb4java').projectDir = "$rootDir/maestro-usb4java" as File
+project(':maestro-android').projectDir = "$rootDir/maestro-android" as File

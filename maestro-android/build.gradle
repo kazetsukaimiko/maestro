@@ -1,0 +1,6 @@
+
+description = ''
+dependencies {
+  compile project(':maestro-core')
+    compileOnly group: 'com.google.android', name: 'android', version:'4.0.1.2'
+}
