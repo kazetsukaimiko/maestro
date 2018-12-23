@@ -1,7 +1,5 @@
 package com.jamierf.maestro;
 
-import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableList;
 import com.jamierf.maestro.api.Parameter;
 import com.jamierf.maestro.api.Product;
 import com.jamierf.maestro.api.Request;
@@ -9,16 +7,18 @@ import com.jamierf.maestro.api.Status;
 import com.jamierf.maestro.binding.DriverBinding;
 import com.jamierf.maestro.settings.ChannelSettings;
 import com.jamierf.maestro.settings.Settings;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.Closeable;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.logging.Logger;
 
 public class MaestroServoController implements Closeable {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MaestroServoController.class);
+    private static final Logger LOG = Logger.getLogger(MaestroServoController.class.getName());
 
     private static final double INSTRUCTION_FREQUENCY = 12000000;
     private static final int REQUEST_TIMEOUT = 5000;
@@ -105,7 +105,7 @@ public class MaestroServoController implements Closeable {
 
         // TODO: Ensure we are within the correct numeric range?
 
-        LOG.debug("Sending parameter: " + index + " = " + value);
+        LOG.finest("Sending parameter: " + index + " = " + value);
 
         conn.send(Request.SET_PARAMETER, value, index);
     }
@@ -194,14 +194,14 @@ public class MaestroServoController implements Closeable {
         // TODO: Read the first ? bytes as micro variables
         payload.position(payload.position() + skip);
 
-        final ImmutableList.Builder<Status> channels = ImmutableList.builder();
+        final List<Status> channels = new ArrayList<>();
 
         for (int servo = 0; servo < product.getPorts(); servo++) {
             final Status status = Status.decode(payload);
             channels.add(status);
         }
 
-        return channels.build();
+        return Collections.unmodifiableList(channels);
     }
 
     public void resetTarget(int servo) {

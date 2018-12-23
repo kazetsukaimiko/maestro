@@ -1,7 +1,6 @@
 package com.jamierf.maestro.api;
 
-import com.google.common.base.Objects;
-
+import java.util.Objects;
 import java.nio.ByteBuffer;
 
 public class Status {
@@ -47,11 +46,11 @@ public class Status {
 
     @Override
     public String toString() {
-        return Objects.toStringHelper(this)
-                .add("position", position)
-                .add("target", target)
-                .add("speed", speed)
-                .add("acceleration", acceleration)
-                .toString();
+        return "Status{" +
+                "position=" + position +
+                ", target=" + target +
+                ", speed=" + speed +
+                ", acceleration=" + acceleration +
+                '}';
     }
 }

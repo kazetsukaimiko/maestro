@@ -1,10 +1,10 @@
 package com.jamierf.maestro.settings;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.jamierf.maestro.api.SerialMode;
 
+import java.util.Collections;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class Settings {
 
@@ -31,7 +31,7 @@ public class Settings {
         private int timeout = 0;
         private boolean scriptDone = true;
         private boolean enablePullups = false;
-        private final Map<Integer, ChannelSettings> channels = Maps.newTreeMap();
+        private final Map<Integer, ChannelSettings> channels = new TreeMap<>();
 
         public Builder setServosAvailable(int servosAvailable) {
             this.servosAvailable = servosAvailable;
@@ -94,7 +94,7 @@ public class Settings {
         }
 
         public Settings build() {
-            return new Settings(servosAvailable, servoPeriod, serialMode, baudRate, enableCrc, neverSuspend, deviceNumber, miniSccOffset, timeout, scriptDone, enablePullups, ImmutableMap.copyOf(channels));
+            return new Settings(servosAvailable, servoPeriod, serialMode, baudRate, enableCrc, neverSuspend, deviceNumber, miniSccOffset, timeout, scriptDone, enablePullups, Collections.unmodifiableMap(channels));
         }
     }
 

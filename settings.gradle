@@ -1,4 +1,5 @@
 rootProject.name = 'maestro-parent'
+
 include ':maestro-core'
 include ':maestro-usb4java'
 include ':maestro-android'

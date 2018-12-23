@@ -1,18 +1,29 @@
+
+buildscript {
+  repositories {
+    jcenter()
+  }
+}
+
 allprojects  {
   apply plugin: 'maven'
-
   group = 'com.jamierf.maestro'
-version = '1.0-SNAPSHOT'
+  version = '1.0-SNAPSHOT'
 }
 
 subprojects {
   apply plugin: 'java'
-  sourceCompatibility = 1.6
-  targetCompatibility = 1.6
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
   tasks.withType(JavaCompile) {
   	options.encoding = 'UTF-8'
   }
 
+  buildscript {
+    repositories {
+      jcenter()
+    }
+  }
   
   repositories {
     mavenLocal()
@@ -23,7 +34,8 @@ subprojects {
   }
 
   configurations.all {
-}
+  }
   
   
 }
+

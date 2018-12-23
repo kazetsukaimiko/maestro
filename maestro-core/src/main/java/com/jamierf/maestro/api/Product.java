@@ -1,6 +1,6 @@
 package com.jamierf.maestro.api;
 
-import com.google.common.base.Optional;
+import java.util.Optional;
 
 // TODO: Device product IDs
 public enum Product {
@@ -21,7 +21,7 @@ public enum Product {
             return Optional.of(product);
         }
 
-        return Optional.absent();
+        return Optional.empty();
     }
 
     private final int vendorId;
